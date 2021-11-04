@@ -153,6 +153,117 @@ int main()
 			cout << "Пользователь зарегестрирован!" << endl;
 		}
 	}
+	
+	cout << "Напоминаем, что просмотреть возможности чата можно, введя команду '-info'" << endl;
+
+	do
+	{
+		loginCheck = false;
+		choise = 0;
+		massage = "";
+		cout << endl;
+		getline(cin, massage);
+		if (massage == "-info")
+		{
+			do
+			{
+				cout << "Возможности чата:" << endl
+					<< "1. Найти пользователя по логину" << endl
+					<< "2. Просмотреть список логинов всех пользователей" << endl
+					<< "3. Выйти из меню" << endl;
+				cin >> choise;
+				if (choise != 1 && choise != 2 && choise != 3)
+				{
+					cout << "Выбирете пункт меню" << endl;
+				}
+			} while (choise != 1 && choise != 2 && choise != 3);
+
+			switch (choise)
+			{
+			case 1:
+				do
+				{
+					cout << "Введите логин пользователя для поиска." << endl
+						<< "Или введите '-main' для выхода в общий чат" << endl;
+					cin >> choisestr;
+					if (choisestr != "-main")
+					{
+						for (int i = 0; i <= counterUserArray; i++)
+						{
+							if (choisestr == UsersArr[i].GetLogin())
+							{
+								massage = "";
+								cout << "Личный чат с " << choisestr << " открыт." << endl
+									<< "Для выхода '-exit' " << endl
+									<< "Для получения информации о пользователе введите '-IU' " << endl;
+								do
+								{
+									massage = "";
+									getline(cin, massage);
+									if (massage != "-exit" && massage != "" && massage != "-IU")
+									{
+										cout << "Сообщение пользователю отправлено." << endl;
+									}
+									if (massage == "-IU")
+									{
+										cout << "ID пользователя\t\t" << UsersArr[i].Getid() << endl;
+										cout << "Логин пользователя\t" << UsersArr[i].GetLogin() << endl;
+										cout << "Имя пользователя\t" << UsersArr[i].GetName() << endl;
+									}
+
+								} while (massage != "-exit");
+
+							}
+							if (choisestr == "-main")
+							{
+								break;
+							}
+							else
+							{
+								loginCheck = false;
+							}
+						}
+					}
+					else if (choisestr == "-main")
+					{
+						break;
+					}
+				} while (loginCheck == false);
+				break;
+
+			case 2:
+			{
+				for (int i = 0; i <= counterUserArray; i++)
+				{
+					cout << UsersArr[i].GetLogin() << endl;
+				}
+			}
+
+			default:
+				break;
+			}
+
+		}
+		else if (massage == "-exit")
+		{
+			break;
+		}
+		else if (massage != "")
+		{
+			for (int i = 0; i <= counterUserArray; i++)
+			{
+				// Проверяем логин, чтобы не отправлять сообщение себе
+				if (UsersArr[i].GetLogin() != userlogin)
+					cout << "Сообщение пользователю " << UsersArr[i].GetLogin() << " отправлено." << endl;
+			}
+		}
+
+	} while (massage != "!exit!");
+
+
+	delete[] UsersArr;
+	registrationcheck = "";
+	return 0;
 
 }
 
