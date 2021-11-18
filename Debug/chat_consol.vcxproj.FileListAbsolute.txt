@@ -1,1 +1,2 @@
 C:\Model_Programm\Project\SF\itogovoe_1\chat_consol\Debug\chat_consol.exe
+C:\Model_Programm\Project\SF\itogovoe_1\chat_consol rebild\Debug\chat_consol.exe
